@@ -1,0 +1,291 @@
+{
+    "name": "minecraft-spigot",
+    "display": "Spigot - Minecraft",
+    "type": "Minecraft",
+    "install": [
+      {
+        "files": [
+          "https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+        ],
+        "type": "download"
+      },
+      {
+        "commands": [
+          "${java} -jar BuildTools.jar --rev ${version}"
+        ],
+        "type": "command"
+      },
+      {
+        "target": "eula.txt",
+        "text": "# Written on install, and on server startup\neula=${eula}",
+        "type": "writefile"
+      },
+      {
+        "target": "server.properties",
+        "text": "# Written by panel\nenable-jmx-monitoring=false\nrcon.port=25575\nlevel-seed=${level-seed}\ngamemode=${gamemode}\nenable-command-block=${enable-command-block}\nenable-query=false\ngenerator-settings=${generator-settings} \nenforce-secure-profile=true\nlevel-name=${level-name} \nmotd=${motd}\nquery.port=25565\npvp=${pvp}\ngenerate-structures=${generate-structures}\nmax-chained-neighbor-updates=1000000\ndifficulty=${difficulty}\nnetwork-compression-threshold=256\nmax-tick-time=60000\nrequire-resource-pack=false\nuse-native-transport=true\nmax-players=${max-players}\nonline-mode=true\nenable-status=true\nallow-flight=false\ninitial-disabled-packs=\nbroadcast-rcon-to-ops=true\nview-distance=6\nserver-ip=${server-ip}\nresource-pack-prompt=\nallow-nether=${allow-nether}\nserver-port=${server-port}\nenable-rcon=false\nsync-chunk-writes=true\nop-permission-level=4\nprevent-proxy-connections=false\nhide-online-players=false\nresource-pack=\nentity-broadcast-range-percentage=100\nsimulation-distance=6\nrcon.password=\nplayer-idle-timeout=0\nforce-gamemode=false\nrate-limit=0\nhardcore=false\nwhite-list=${whitelist}\nbroadcast-console-to-ops=true\nspawn-npcs=${spawn-npcs}\nspawn-animals=${spawn-animals}\nfunction-permission-level=2\ninitial-enabled-packs=vanilla\nlevel-type=minecraft\\:normal\ntext-filtering-config=\nspawn-monsters=${spawn-monster}\nenforce-whitelist=false\nspawn-protection=${spawn-protection}\nresource-pack-sha1=\nmax-world-size=29999984",
+        "type": "writefile"
+      },
+      {
+        "source": "spigot-*.jar",
+        "target": "server.jar",
+        "type": "move"
+      }
+    ],
+    "run": {
+      "stop": "stop",
+      "command": "${java} -Xmx${memory}M -Djline.terminal=jline.UnsupportedTerminal -Dlog4j2.formatMsgNoLookups=true -jar server.jar nogui",
+      "workingDirectory": "",
+      "pre": [
+        {
+          "type": "writefile",
+          "text": "# Written by panel\nenable-jmx-monitoring=false\nrcon.port=25575\nlevel-seed=${level-seed}\ngamemode=${gamemode}\nenable-command-block=${enable-command-block}\nenable-query=false\ngenerator-settings=${generator-settings} \nenforce-secure-profile=true\nlevel-name=${level-name} \nmotd=${motd}\nquery.port=25565\npvp=${pvp}\ngenerate-structures=${generate-structures}\nmax-chained-neighbor-updates=1000000\ndifficulty=${difficulty}\nnetwork-compression-threshold=256\nmax-tick-time=60000\nrequire-resource-pack=false\nuse-native-transport=true\nmax-players=${max-players}\nonline-mode=true\nenable-status=true\nallow-flight=false\ninitial-disabled-packs=\nbroadcast-rcon-to-ops=true\nview-distance=6\nserver-ip=${server-ip}\nresource-pack-prompt=\nallow-nether=${allow-nether}\nserver-port=${server-port}\nenable-rcon=false\nsync-chunk-writes=true\nop-permission-level=4\nprevent-proxy-connections=false\nhide-online-players=false\nresource-pack=\nentity-broadcast-range-percentage=100\nsimulation-distance=6\nrcon.password=\nplayer-idle-timeout=0\nforce-gamemode=false\nrate-limit=0\nhardcore=false\nwhite-list=${whitelist}\nbroadcast-console-to-ops=true\nspawn-npcs=${spawn-npcs}\nspawn-animals=${spawn-animals}\nfunction-permission-level=2\ninitial-enabled-packs=vanilla\nlevel-type=minecraft\\:normal\ntext-filtering-config=\nspawn-monsters=${spawn-monster}\nenforce-whitelist=false\nspawn-protection=${spawn-protection}\nresource-pack-sha1=\nmax-world-size=29999984",
+          "target": "server.properties"
+        },
+        {
+          "type": "writefile",
+          "text": "eula=${eula}",
+          "target": "eula.txt"
+        }
+      ],
+      "post": [
+        {
+          "type": "writefile",
+          "text": "# Written by panel\nenable-jmx-monitoring=false\nrcon.port=25575\nlevel-seed=${level-seed}\ngamemode=${gamemode}\nenable-command-block=${enable-command-block}\nenable-query=false\ngenerator-settings=${generator-settings} \nenforce-secure-profile=true\nlevel-name=${level-name} \nmotd=${motd}\nquery.port=25565\npvp=${pvp}\ngenerate-structures=${generate-structures}\nmax-chained-neighbor-updates=1000000\ndifficulty=${difficulty}\nnetwork-compression-threshold=256\nmax-tick-time=60000\nrequire-resource-pack=false\nuse-native-transport=true\nmax-players=${max-players}\nonline-mode=true\nenable-status=true\nallow-flight=false\ninitial-disabled-packs=\nbroadcast-rcon-to-ops=true\nview-distance=6\nserver-ip=${server-ip}\nresource-pack-prompt=\nallow-nether=${allow-nether}\nserver-port=${server-port}\nenable-rcon=false\nsync-chunk-writes=true\nop-permission-level=4\nprevent-proxy-connections=false\nhide-online-players=false\nresource-pack=\nentity-broadcast-range-percentage=100\nsimulation-distance=6\nrcon.password=\nplayer-idle-timeout=0\nforce-gamemode=false\nrate-limit=0\nhardcore=false\nwhite-list=${whitelist}\nbroadcast-console-to-ops=true\nspawn-npcs=${spawn-npcs}\nspawn-animals=${spawn-animals}\nfunction-permission-level=2\ninitial-enabled-packs=vanilla\nlevel-type=minecraft\\:normal\ntext-filtering-config=\nspawn-monsters=${spawn-monster}\nenforce-whitelist=false\nspawn-protection=${spawn-protection}\nresource-pack-sha1=\nmax-world-size=29999984",
+          "target": "server.properties"
+        }
+      ],
+      "environmentVars": {}
+    },
+    "data": {
+      "eula": {
+        "type": "boolean",
+        "desc": "Do you agree to the Minecraft EULA?",
+        "display": "EULA Agreement",
+        "required": true,
+        "value": "false",
+        "userEdit": true
+      },
+      "version": {
+        "type": "string",
+        "display": "Version",
+        "desc": "Version of Minecraft to install (<a href='https://www.spigotmc.org/wiki/buildtools/#versions'>Supported versions</a>)",
+        "required": true,
+        "value": "latest",
+        "userEdit": true
+      },
+      "java": {
+        "type": "string",
+        "desc": "\"java\" for system standard, else direct path to java<small style=\"color:red\">Admin only</small>",
+        "display": "Path to java executable",
+        "required": true,
+        "value": "java",
+        "userEdit": false
+      },
+      "memory": {
+        "type": "integer",
+        "display": "Memory (MB)",
+        "desc": "How much memory in MB to allocate to the Java Heap<small style=\"color:red\">Admin only</small> <small style=\"color:yellow\">1024, 2048, 4096, 6144, 8192</small>",
+        "required": true,
+        "value": "1024",
+        "userEdit": false
+      },
+      "level-seed": {
+        "type": "string",
+        "desc": "World seed",
+        "display": "Level Seed",
+        "required": false,
+        "value": "",
+        "userEdit": true
+      },
+      "gamemode": {
+        "type": "option",
+        "options": [
+          {
+            "value": "survival",
+            "display": "Survival"
+          },
+          {
+            "value": "creative",
+            "display": "Creative"
+          },
+          {
+            "value": "adventure",
+            "display": "Adventure"
+          },
+          {
+            "value": "spectator",
+            "display": "Spectator"
+          }
+        ],
+        "display": "Gamemode",
+        "desc": "Default Gamemode",
+        "required": true,
+        "value": "survival",
+        "userEdit": true
+      },
+      "enable-command-block": {
+        "type": "boolean",
+        "display": "Enable Command Blocks",
+        "desc": "Toggle whether command blocks function",
+        "required": true,
+        "value": "false",
+        "userEdit": true
+      },
+      "generator-settings": {
+        "type": "string",
+        "display": "Generator Settings",
+        "desc": "World Generation settings<small style=\"color:yellow\">JSON Object {}</small>",
+        "required": false,
+        "value": "",
+        "userEdit": true
+      },
+      "level-name": {
+        "type": "string",
+        "display": "World Name",
+        "desc": "Level Name",
+        "required": true,
+        "value": "world",
+        "userEdit": true
+      },
+      "motd": {
+        "type": "string",
+        "display": "MOTD",
+        "desc": "Message of The Day - Appears below server name in server browser",
+        "required": true,
+        "value": "Hosted by Likogan.Dev",
+        "userEdit": true
+      },
+      "pvp": {
+        "type": "boolean",
+        "display": "Enable PvP",
+        "desc": "Enable Player vs Player combat",
+        "required": true,
+        "value": "true",
+        "userEdit": true
+      },
+      "generate-structures": {
+        "type": "boolean",
+        "display": "Generate Structures",
+        "desc": "Toggles structure generation on world creation",
+        "required": true,
+        "value": "true",
+        "userEdit": true
+      },
+      "difficulty": {
+        "type": "option",
+        "options": [
+          {
+            "value": "peaceful",
+            "display": "Peaceful"
+          },
+          {
+            "value": "easy",
+            "display": "Easy"
+          },
+          {
+            "value": "medium",
+            "display": "Medium"
+          },
+          {
+            "value": "hard",
+            "display": "Hard"
+          }
+        ],
+        "display": "Difficulty",
+        "desc": "Game Difficulty",
+        "required": true,
+        "value": "easy",
+        "userEdit": true
+      },
+      "max-players": {
+        "type": "integer",
+        "desc": "Maximum server players<small style=\"color:red\">Admin only</small>",
+        "display": "Max Players",
+        "required": true,
+        "value": "20",
+        "userEdit": false
+      },
+      "server-ip": {
+        "type": "string",
+        "display": "Server IP",
+        "desc": "Ip for the server to bind too<small style=\"color:red\">Admin only</small>",
+        "required": true,
+        "value": "0.0.0.0",
+        "userEdit": false
+      },
+      "allow-nether": {
+        "type": "boolean",
+        "display": "Allow Nether",
+        "desc": "Toggles Nether",
+        "required": true,
+        "value": "true",
+        "userEdit": true
+      },
+      "server-port": {
+        "type": "integer",
+        "display": "Server Port",
+        "desc": "What port to bind the server to<small style=\"color:red\">Admin only</small>",
+        "required": true,
+        "value": "25565",
+        "userEdit": true
+      },
+      "whitelist": {
+        "type": "boolean",
+        "display": "Whitelist",
+        "desc": "Toggle Whitelist",
+        "required": true,
+        "value": "false",
+        "userEdit": true
+      },
+      "spawn-npcs": {
+        "type": "boolean",
+        "display": "Spawn NPCs",
+        "desc": "Toggles spawning of NPCs",
+        "required": true,
+        "value": "true",
+        "userEdit": true
+      },
+      "spawn-animals": {
+        "type": "boolean",
+        "display": "Spawn Animals",
+        "desc": "Toggles spawning of animals",
+        "required": true,
+        "value": "true",
+        "userEdit": true
+      },
+      "spawn-monsters": {
+        "type": "boolean",
+        "display": "Spawn Monsters",
+        "desc": "Toggles spawning of monsters",
+        "required": true,
+        "value": "true",
+        "userEdit": true
+      },
+      "spawn-protection": {
+        "type": "integer",
+        "display": "Server Port",
+        "desc": "What port to bind the server to<small style=\"color:red\">Admin only</small>",
+        "required": true,
+        "value": "25565",
+        "userEdit": true
+      }
+    },
+    "environment": {
+      "type": "standard"
+    },
+    "supportedEnvironments": [
+      {
+        "type": "standard"
+      },
+      {
+        "image": "openjdk:8-alpine",
+        "type": "docker"
+      }
+    ],
+    "requirements": {
+      "binaries": [
+        "${java}",
+        "git"
+      ]
+    }
+  }
